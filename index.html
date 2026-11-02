@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Elektro Meister 🇩🇪 | معلم الإلكترونيات في ألمانيا</title>
+  <meta name="description" content="لعبة معلم الإلكترونيات في ألمانيا - اجمع القطع الإلكترونية المتطورة وقم بتلبية طلبات الشركات الألمانية وطوّر متجرك في برلين!">
+  <link rel="icon" type="image/png" href="assets/hero_avatar.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- German Flag Header Line -->
+  <div class="german-top-bar">
+    <div class="stripe-black"></div>
+    <div class="stripe-red"></div>
+    <div class="stripe-gold"></div>
+  </div>
+
+  <div class="game-wrapper">
+
+    <!-- Header & Hero Profile -->
+    <header class="game-header">
+      <div class="hero-profile">
+        <img src="assets/hero_avatar.png" alt="Elektro Meister" class="hero-avatar-circle" id="header-avatar">
+        <div class="hero-titles">
+          <h1>ELEKTRO MEISTER ⚡</h1>
+          <div class="hero-subtitle">
+            <span>🇩🇪 ألمانيا للإلكترونيات المتطورة</span>
+            <span>• برلين & ميونخ</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <button id="btn-open-shop" class="btn-ctrl btn-shop-trigger">🛒 المتجر (0€)</button>
+        <button id="btn-toggle-music" class="btn-ctrl">🎵 الموسيقى: صامت</button>
+        <button id="btn-toggle-sfx" class="btn-ctrl active">🔊 المؤثرات</button>
+        <button id="btn-how-to-play" class="btn-ctrl">❓ التعليمات</button>
+      </div>
+    </header>
+
+    <!-- Active German Customer Order Card -->
+    <section class="order-card-container">
+      <div id="order-card-content">
+        <!-- Rendered dynamically via components.js / game.js -->
+      </div>
+    </section>
+
+    <!-- Main Game Screen Area -->
+    <main id="game-container">
+
+      <!-- HUD Top Bar -->
+      <div class="hud-bar">
+        <div class="hud-stat hud-score">
+          <span class="hud-label">النقاط</span>
+          <span class="hud-val" id="hud-score">0</span>
+        </div>
+        <div class="hud-stat hud-euros">
+          <span class="hud-label">الأرباح</span>
+          <span class="hud-val" id="hud-euros">0€</span>
+        </div>
+        <div class="hud-stat hud-combo">
+          <span class="hud-label">المضاعف</span>
+          <span class="hud-val" id="hud-combo">x0</span>
+        </div>
+        <div class="hud-stat hud-level">
+          <span class="hud-label">المستوى</span>
+          <span class="hud-val" id="hud-level">1</span>
+        </div>
+        <div class="hud-stat hud-lives">
+          <span class="hud-label">الحماية</span>
+          <span class="hud-val" id="hud-lives">❤️❤️❤️</span>
+        </div>
+      </div>
+
+      <!-- Canvas Frame -->
+      <div id="canvas-container">
+        <div id="hero-quote-bubble">أهلاً بكم في متجر الإلكترونيات بألمانيا! 🇩🇪⚡</div>
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- Start Overlay -->
+        <div id="start-overlay" class="overlay">
+          <div class="modal-content">
+            <img src="assets/hero_avatar.png" alt="Hero Avatar" class="modal-hero-photo">
+            <h2 class="modal-title">معلم الإلكترونيات في <span>ألمانيا 🇩🇪</span></h2>
+            <p class="modal-desc">
+              مرحباً بك في برلين! أنت خبير قطع الغيار والإلكترونيات الألمانية الفائقة.
+              حرّك عربة الورشة الذكية واجمع أحدث المعالجات، كروت الشاشة، والرامات لتلبية طلبات الزبائن وتطوير متجرك!
+            </p>
+            <button id="btn-start-game" class="btn-action-primary">🚀 ابدأ العمل واللعب الآن!</button>
+          </div>
+        </div>
+
+        <!-- Pause Overlay -->
+        <div id="pause-overlay" class="overlay hidden">
+          <div class="modal-content">
+            <h2 class="modal-title">اللعبة <span>متوقفة مؤقتاً ⏸️</span></h2>
+            <p class="modal-desc">استراحة فني صيانة! اضغط للاستئناف عندما تكون جاهزاً.</p>
+            <button id="btn-resume-game" class="btn-action-primary">▶️ متابعة اللعب</button>
+          </div>
+        </div>
+
+        <!-- Game Over Overlay -->
+        <div id="gameover-overlay" class="overlay hidden">
+          <div class="modal-content">
+            <img src="assets/hero_avatar.png" alt="Hero Avatar" class="modal-hero-photo">
+            <h2 class="modal-title">نهاية الوردية <span>يا بطل! 🇩🇪</span></h2>
+            <div id="final-title" class="german-title-badge">كبير مهندسي الإلكترونيات في ألمانيا</div>
+
+            <div class="gameover-stats-grid">
+              <div class="stat-box">
+                <div class="stat-box-label">مجموع النقاط</div>
+                <div class="stat-box-val" id="final-score">0</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-box-label">صافي الأرباح</div>
+                <div class="stat-box-val" id="final-euros">0€</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-box-label">الطلبات المنجزة</div>
+                <div class="stat-box-val" id="final-orders">0</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-box-label">أعلى سلسلة كومبو</div>
+                <div class="stat-box-val" id="final-combo">0</div>
+              </div>
+            </div>
+
+            <button id="btn-restart-game" class="btn-action-primary">🔄 جولة جديدة والتحدي الأكبر</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Mobile Touch Controls -->
+      <div class="mobile-controls">
+        <button id="btn-left" class="btn-touch-nav">⬅️ يسار</button>
+        <button id="btn-right" class="btn-touch-nav">يمين ➡️</button>
+      </div>
+
+    </main>
+
+    <!-- Shop Modal -->
+    <div id="shop-modal" class="overlay hidden">
+      <div class="modal-content shop-modal-content">
+        <h2 class="modal-title">🛒 متجر ترقية <span>الورشة الألمانية</span></h2>
+        <p class="modal-desc">استثمر أرباحك باليورو لتطوير معدات متجرك وزيادة المبيعات والسرعة!</p>
+        <div id="shop-items-list" class="shop-items-container">
+          <!-- Rendered dynamically -->
+        </div>
+        <button id="btn-close-shop" class="btn-action-secondary">إغلاق المتجر والعودة للعمل ✖</button>
+      </div>
+    </div>
+
+    <!-- Instructions / How to play Modal -->
+    <div id="howto-modal" class="overlay hidden">
+      <div class="modal-content">
+        <h2 class="modal-title">📖 كيف <span>تلعب؟</span></h2>
+        <div class="guide-list">
+          <div class="guide-row">
+            <span class="guide-icon">🎮</span>
+            <span>التحكم: أسهم لوحة المفاتيح (أو A/D) أو عبر حركة الماوس أو اللمس للموبايل.</span>
+          </div>
+          <div class="guide-row">
+            <span class="guide-icon">⚡</span>
+            <span>اجمع المعالجات، كروت الشاشة، الرامات والمكثفات لكسب اليورو والنقاط.</span>
+          </div>
+          <div class="guide-row">
+            <span class="guide-icon">🇩🇪</span>
+            <span>ختم الجودة الألماني (TÜV) يفعل وضع السرعة الفائقة ومضاعفة الأرباح!</span>
+          </div>
+          <div class="guide-row">
+            <span class="guide-icon">💥</span>
+            <span>تجنب المكثفات المحترقة، التماسات الكهرباء، والقطع المقلدة الرديئة!</span>
+          </div>
+          <div class="guide-row">
+            <span class="guide-icon">📦</span>
+            <span>طابق القطع المطلوبة في كرت الزبون في الأعلى للحصول على مكافآت ضخمة!</span>
+          </div>
+        </div>
+        <button id="btn-close-howto" class="btn-action-primary">فهمت، جاهز للعب! 👍</button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="game-footer">
+      <div class="footer-tags">
+        <span>Made with Precision 🇩🇪</span>
+        <span>•</span>
+        <span>HTML5 & Canvas & Web Audio API</span>
+        <span>•</span>
+        <span>Made for German Electronics Master</span>
+      </div>
+      <div>جميع الحقوق محفوظة © Elektro Meister Game</div>
+    </footer>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/audio.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
